@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin Bayley — Cloud & AI Applications</title>
+<meta name="description" content="Kevin Bayley — Cloud & AI Applications trainee. Serverless AWS systems and AI-powered tools, built in Barbados.">
+<style>
+  :root{
+    --bg:#0f1b1e;
+    --panel:#16262a;
+    --panel-2:#1c3236;
+    --line:#284247;
+    --text:#dceae7;
+    --dim:#8aa6a2;
+    --green:#4bd6a4;
+    --amber:#e8b75c;
+    --white:#f4faf8;
+    --mono: ui-monospace, 'SFMono-Regular', 'Courier New', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --max: 1040px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); line-height:1.6;
+  }
+  a{color:var(--green); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--green); outline-offset:3px;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,27,30,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--max); margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:14.5px; letter-spacing:0.04em; color:var(--white); font-weight:700;}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); flex-shrink:0;}
+  nav ul{list-style:none; display:flex; gap:26px; margin:0; padding:0;}
+  nav ul a{font-family:var(--mono); font-size:12px; letter-spacing:0.07em; text-transform:uppercase; color:var(--dim);}
+  nav ul a:hover{color:var(--green); text-decoration:none;}
+  nav ul a.active{color:var(--green);}
+
+  .hero{padding:88px 24px 64px; border-bottom:1px solid var(--line);}
+  .role{font-family:var(--sans); font-size:16px; font-weight:600; color:var(--amber); margin:0 0 16px;}
+  h1{font-size:clamp(32px,5.2vw,54px); line-height:1.08; letter-spacing:-0.01em; color:var(--white); margin:0 0 20px; max-width:16ch; font-weight:800;}
+  .hero p.lede{font-size:17.5px; color:var(--text); max-width:56ch; margin:0 0 32px;}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:48px;}
+  .btn{display:inline-block; padding:13px 24px; font-family:var(--mono); font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase; border-radius:2px; font-weight:700;}
+  .btn-primary{background:var(--green); color:var(--bg);}
+  .btn-primary:hover{background:var(--white); text-decoration:none;}
+  .btn-ghost{border:1px solid var(--line); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--green); color:var(--green); text-decoration:none;}
+
+  .pill{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:11px; letter-spacing:0.05em; text-transform:uppercase; padding:5px 10px; border-radius:20px; width:fit-content;}
+  .pill.live{background:rgba(75,214,164,0.12); color:var(--green); border:1px solid rgba(75,214,164,0.35);}
+  .pill.progress{background:rgba(232,183,92,0.12); color:var(--amber); border:1px solid rgba(232,183,92,0.35);}
+
+  section{padding:72px 24px; border-bottom:1px solid var(--line);}
+  .section-head{max-width:var(--max); margin:0 auto 36px;}
+  .section-head h2{font-size:clamp(22px,3vw,30px); color:var(--white); margin:0; font-weight:800; letter-spacing:-0.01em;}
+
+  /* About intro + photo */
+  .about-top{max-width:var(--max); margin:0 auto 40px; display:grid; grid-template-columns:140px 1fr; gap:28px; align-items:center;}
+  .avatar{width:140px; height:140px; border-radius:50%; object-fit:cover; border:2px solid var(--green); background:var(--panel);}
+  .about-top p{margin:0; font-size:16px; color:var(--text); max-width:60ch;}
+
+  /* Timeline (real sequence) */
+  .timeline{max-width:var(--max); margin:0 auto; display:grid; gap:0;}
+  .tl-row{display:grid; grid-template-columns:56px 1fr; gap:20px; padding:22px 0; border-bottom:1px solid var(--line);}
+  .tl-row:last-child{border-bottom:none;}
+  .tl-num{font-family:var(--mono); color:var(--amber); font-size:13px;}
+  .tl-row h4{margin:0 0 6px; color:var(--white); font-size:17px;}
+  .tl-row p{margin:0; color:var(--dim); font-size:14.5px; max-width:60ch;}
+
+  /* Project cards */
+  .projects{max-width:var(--max); margin:0 auto; display:grid; gap:28px;}
+  .proj{border:1px solid var(--line); background:var(--panel); transition:border-color 0.15s ease;}
+  .proj:hover{border-color:var(--green);}
+  .proj-top{padding:26px 26px 0;}
+  .proj-top .pill{margin-bottom:14px;}
+  .proj h3{color:var(--white); font-size:20px; margin:0 0 10px; font-weight:800;}
+  .proj p.desc{color:var(--text); font-size:15px; margin:0 0 18px; max-width:70ch;}
+  .stack{display:flex; flex-wrap:wrap; gap:8px; padding:0 26px 22px;}
+  .chip{font-family:var(--mono); font-size:11.5px; color:var(--dim); border:1px solid var(--line); padding:5px 10px; border-radius:3px;}
+  .proj-links{display:flex; gap:18px; padding:18px 26px; border-top:1px solid var(--line); background:var(--panel-2);}
+  .proj-links a{font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em; text-transform:uppercase;}
+
+  /* Skills */
+  .skills{max-width:var(--max); margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .skill-group h4{font-family:var(--mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--amber); margin:0 0 14px;}
+  .skill-group ul{list-style:none; margin:0; padding:0;}
+  .skill-group li{color:var(--text); font-size:14.5px; padding:6px 0; border-bottom:1px solid var(--line);}
+  .skill-group li:last-child{border-bottom:none;}
+
+  #privacy{padding:56px 24px;}
+  #privacy .wrap{max-width:var(--max); margin:0 auto;}
+  #privacy h2{color:var(--white); font-size:22px; margin:0 0 8px;}
+  #privacy .updated{font-family:var(--mono); font-size:12px; color:var(--dim); margin:0 0 24px;}
+  #privacy h3{color:var(--white); font-size:15px; margin:22px 0 8px;}
+  #privacy p, #privacy li{color:var(--text); font-size:14.5px;}
+  #privacy ul{margin:0; padding-left:20px;}
+
+  footer{padding:72px 24px 48px;}
+  .contact-block{max-width:var(--max); margin:0 auto; border:1px solid var(--line); background:var(--panel); padding:40px; display:grid; grid-template-columns:1.3fr 1fr; gap:32px; align-items:center;}
+  .contact-block h2{color:var(--white); font-size:24px; margin:0 0 12px;}
+  .contact-block p{color:var(--text); margin:0; font-size:15px;}
+  .contact-meta{font-family:var(--mono); font-size:13px; color:var(--dim);}
+  .contact-meta a{display:block; color:var(--green); margin-bottom:8px; word-break:break-all;}
+  .fine{max-width:var(--max); margin:28px auto 0; font-size:12px; color:var(--dim); font-family:var(--mono);}
+
+  @media (max-width:760px){
+    nav ul{display:none;}
+    .board-row{grid-template-columns:1fr; gap:6px;}
+    .skills{grid-template-columns:1fr;}
+    .contact-block{grid-template-columns:1fr;}
+    .tl-row{grid-template-columns:40px 1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="dot"></span> KEVIN BAYLEY</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="role">Cloud &amp; AI applications trainee, based in Barbados</p>
+    <h1>I build systems that stay honest about what's real.</h1>
+    <p class="lede">Barbados-based, focused on serverless AWS architecture and AI-powered tools — with an emphasis on getting the details right: tested IAM policies, clear data-handling decisions, and infrastructure that fails loudly instead of quietly.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#projects">View projects</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/kevin-bayley-9273b3347" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head"><h2>About</h2></div>
+  <div class="about-top">
+    <img src="profile.jpg" alt="Kevin Bayley" class="avatar">
+    <p>I'm Kevin Bayley, a Cloud &amp; AI Applications trainee based in Barbados, combining technical skill with a problem-solving mindset to contribute to the future of intelligent systems.</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-num">01</div>
+      <div>
+        <h4>Curiosity about how things work</h4>
+        <p>My path into tech started with wanting to understand systems from the inside and a drive to make processes better, not just use them.</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-num">02</div>
+      <div>
+        <h4>Associate's Degree in Computer Science</h4>
+        <p>Built a solid foundation in programming and systems thinking — the base everything since has built on.</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-num">03</div>
+      <div>
+        <h4>Cloud &amp; AI Applications</h4>
+        <p>Now focused on becoming proficient in cloud computing and AI technologies — combining technical skill with a problem-solving mindset, and applying both to real, deployed systems rather than tutorials.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-head"><h2>Projects</h2></div>
+  <div class="projects">
+
+    <div class="proj">
+      <div class="proj-top">
+        <span class="pill live">Deployed — AWS dev environment</span>
+        <h3>Hurricane Preparedness Portal — Barbados</h3>
+        <p class="desc">A serverless portal for hurricane alerts, emergency shelter lookup, and outage reporting, built end-to-end on AWS and deployed with CDK across five stacks. Every route has been exercised against real AWS — not just mocked — including forcing a live IAM denial to confirm the API fails loudly (a 500) rather than silently returning an empty result on a life-safety endpoint. Shelter data carries its official source and year on every record, and personal data is deliberately minimal: outage reports carry no reporter identity, and subscriber emails are never stored, only passed through to SNS.</p>
+      </div>
+      <div class="stack">
+        <span class="chip">AWS Lambda</span>
+        <span class="chip">API Gateway</span>
+        <span class="chip">DynamoDB</span>
+        <span class="chip">Cognito</span>
+        <span class="chip">SNS</span>
+        <span class="chip">CloudFront</span>
+        <span class="chip">AWS CDK</span>
+        <span class="chip">Python</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/Notty-cloud/hurricane-preparedness-portal-barbados" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="#">Live demo — domain coming soon</a>
+      </div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <span class="pill live">Deployed — Grocery pilot, Barbados</span>
+        <h3>Caribbean Data Tracker (CSDT)</h3>
+        <p class="desc">An AI-enabled SaaS platform built to remove the need for in-house analysts at Caribbean businesses — demand forecasting, inventory planning, and industry-specific factor analysis (weather, holidays, seasonality) translated into plain-language recommendations. Launching with a grocery retail pilot in Barbados, with restaurant, pharmacy, retail, and government verticals already implemented behind a configuration-over-code design rather than hardcoded per-industry logic. The Flask service owns auth, multi-tenancy, and all forecasting logic; the Node.js layer is a deliberately thin gateway in front of it. Built with secure multi-tenant data isolation, role-based access control, and audit logging, and designed with ISO/IEC 42001 AI-governance principles — risk management, transparency, and data privacy — in mind from the start. Backed by 485 passing tests in CI.</p>
+      </div>
+      <div class="stack">
+        <span class="chip">React + TypeScript</span>
+        <span class="chip">Node.js / Express</span>
+        <span class="chip">Python / Flask</span>
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">Docker Compose</span>
+        <span class="chip">JWT Auth</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/Notty-cloud/caribbean-data-tracker" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-head"><h2>Skills</h2></div>
+  <div class="skills">
+    <div class="skill-group">
+      <h4>Cloud &amp; Infrastructure</h4>
+      <ul>
+        <li>AWS Lambda &amp; API Gateway</li>
+        <li>DynamoDB</li>
+        <li>Cognito (auth &amp; access control)</li>
+        <li>CloudFront &amp; S3</li>
+        <li>Infrastructure as Code (CDK)</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Programming</h4>
+      <ul>
+        <li>Python (Flask)</li>
+        <li>Node.js / Express</li>
+        <li>React &amp; TypeScript</li>
+        <li>Git &amp; GitHub workflows</li>
+        <li>Automated testing (485+ tests, CI)</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>AI &amp; Applications</h4>
+      <ul>
+        <li>Demand forecasting &amp; ML-driven recommendations</li>
+        <li>Multi-tenant SaaS architecture</li>
+        <li>AI governance (ISO/IEC 42001 alignment)</li>
+        <li>Systems thinking &amp; problem-solving</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="wrap">
+    <h2>Privacy Policy</h2>
+    <p class="updated">Last updated: September 2026</p>
+    <p>This site is a static personal portfolio with no backend, forms, or database — it does not collect, store, or sell any personal data itself.</p>
+
+    <h3>Hosting</h3>
+    <p>This site is hosted on GitHub Pages. As with any web host, GitHub may automatically log standard technical information (such as IP address and browser type) as part of serving the page. This is governed by GitHub's own privacy statement, not by me.</p>
+
+    <h3>Cookies &amp; tracking</h3>
+    <p>This site does not set cookies and does not use analytics or advertising trackers.</p>
+
+    <h3>External links</h3>
+    <p>Links to LinkedIn and GitHub project repositories take you to third-party sites with their own privacy policies, which I don't control.</p>
+
+    <h3>Contact</h3>
+    <p>Questions about this policy can be sent via <a href="https://www.linkedin.com/in/kevin-bayley-9273b3347" target="_blank" rel="noopener">LinkedIn</a>.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="contact-block">
+    <div>
+      <h2>Let's connect</h2>
+      <p>Open to opportunities in cloud and AI applications — feel free to reach out or take a look at the work above.</p>
+    </div>
+    <div class="contact-meta">
+      <a href="https://www.linkedin.com/in/kevin-bayley-9273b3347" target="_blank" rel="noopener">linkedin.com/in/kevin-bayley-9273b3347</a>
+      <a href="https://github.com/Notty-cloud" target="_blank" rel="noopener">github.com/Notty-cloud</a>
+    </div>
+  </div>
+  <p class="fine">Kevin Bayley — Barbados. Built and deployed as part of a Cloud &amp; AI Applications training program. · <a href="#privacy">Privacy Policy</a></p>
+</footer>
+
+<script>
+  // Highlight the nav link for whichever section is currently in view.
+  const sections = document.querySelectorAll('section[id], footer[id]');
+  const navLinks = document.querySelectorAll('nav ul a');
+  const setActive = () => {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 90;
+      if (window.scrollY >= top) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  };
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+</script>
+
+</body>
+</html>
